@@ -6,12 +6,17 @@ with open("input4.txt", "r") as f:
     guesses = numbers[0].split(",")
     numbers.pop(0)
     numbers.pop(0)
-    for i in range(len(numbers)): #vai matriz a matriz
-        if i%5==0:counter+=1
-        for j in range(5): #linha da matriz
-            for e in guesses:
-                if numbers[i][j] ==  e:
-                    numbers[i][j] = '0'
-        if numbers[i] == ['0','0','0','0','0']:break
+    for i in range(len(numbers)): #quebra as linhas da matriz 
+        numbers[i] = numbers[i].split(" ")
+        numbers[i] = list(filter(lambda a : a != "",numbers[i]))
+    
+    for e in guesses:
+        for j in range(len(numbers)):
+            if numbers[j] == ['*','*','*','*','*']:break
+            if numbers[j] == "\n":continue 
+            for k in range(len(numbers[j])):
+                for e in guesses:
+                    if numbers[j][k] == e:
+                        numbers[j][k] = '*'  
     print(numbers)
-        
+
